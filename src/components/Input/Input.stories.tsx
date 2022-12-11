@@ -1,5 +1,6 @@
 import {Input, InputProps} from "./Input";
 import {createStorybookTemplate} from "../../utils/storybook";
+import {InputString} from "./InputString/InputString";
 
 export default {
   title: 'Input',
@@ -9,8 +10,14 @@ export default {
 const COMMON_PROPS = {
   id: 'example',
   name: 'example',
-  placeholder: 'Insert value',
+  placeholder: 'Placeholder..',
 }
+
+const BASE_OPTIONS = [
+  { value: 'foo', label: 'Foo' },
+  { value: 'bar', label: 'Bar' },
+  { value: 'baz', label: 'Baz' },
+];
 
 const Template = createStorybookTemplate<InputProps>((props) => {
   return (
@@ -64,18 +71,19 @@ export const Select = Template.createVariant({
   ...COMMON_PROPS,
   type: 'select',
   nullable: true,
-  options: [
-    { value: 'foo', label: 'Foo' },
-    { value: 'bar', label: 'Bar' },
-    { value: 'baz', label: 'Baz' },
-  ],
+  options: BASE_OPTIONS,
 });
 export const Checkbox = Template.createVariant({
   ...COMMON_PROPS,
   type: 'checkbox',
-  options: [
-    { value: 'foo', label: 'Foo' },
-    { value: 'bar', label: 'Bar' },
-    { value: 'baz', label: 'Baz' },
-  ],
+  options: BASE_OPTIONS,
+});
+export const Radio = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'radio',
+  options: BASE_OPTIONS,
+});
+export const Boolean = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'boolean',
 });

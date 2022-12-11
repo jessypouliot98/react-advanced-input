@@ -9,7 +9,7 @@ export type InputNumberProps = InputComponentProps<NumberType, number | null>;
 export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>((props, ref) => {
   const { type, onChange, onChangeValue, ...inputProps } = props;
   const valueRef = useRef<string>((props.value ?? props.defaultValue ?? '').toString());
-  const { value, setValue } = useInputValue(props);
+  const { value, setValue } = useInputValue<number | null>(props);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     valueRef.current = parseValue(type, e.target.value);
@@ -39,6 +39,7 @@ export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>((props
       ref={ref}
       type={getType(type)}
       value={inputValue}
+      defaultValue={undefined}
       onChange={handleChange}
     />
   )

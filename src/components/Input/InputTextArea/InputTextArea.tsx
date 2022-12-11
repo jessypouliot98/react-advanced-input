@@ -22,6 +22,7 @@ export const InputTextArea = forwardRef<HTMLTextAreaElement, InputTextAreaProps>
       {...inputProps}
       ref={ref}
       value={value ?? ''}
+      defaultValue={undefined}
       onChange={handleChange}
     />
   )

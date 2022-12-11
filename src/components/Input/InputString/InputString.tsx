@@ -1,4 +1,4 @@
-import React, {forwardRef, useCallback, useImperativeHandle, useRef} from "react";
+import React, {forwardRef, useCallback} from "react";
 import {InputComponentProps} from "../types";
 import {getType} from "./utils";
 import {useInputValue} from "../../../hooks/input/useInputValue";
@@ -9,9 +9,7 @@ export type InputStringProps = InputComponentProps<StringType, string>;
 export const InputString = forwardRef<HTMLInputElement, InputStringProps>((props, ref) => {
   const { type, onChange, onChangeValue, onBlur, ...inputProps } = props;
 
-  const inputRef = useRef<HTMLInputElement>(null);
   const { value, setValue } = useInputValue(props);
-  useImperativeHandle(ref, () => inputRef.current as HTMLInputElement);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
     setValue(e.target.value)
@@ -22,9 +20,10 @@ export const InputString = forwardRef<HTMLInputElement, InputStringProps>((props
   return (
     <input
       {...inputProps}
-      ref={inputRef}
+      ref={ref}
       type={getType(type)}
       value={value ?? ''}
+      defaultValue={undefined}
       onChange={handleChange}
     />
   )

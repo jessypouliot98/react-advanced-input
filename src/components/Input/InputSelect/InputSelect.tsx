@@ -28,8 +28,9 @@ export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>((prop
 
   return (
     <select
+      {...selectProps}
       value={inputValue}
-      name={selectProps.name}
+      defaultValue={undefined}
       onChange={handleChange}
     >
       {!!nullable && (
