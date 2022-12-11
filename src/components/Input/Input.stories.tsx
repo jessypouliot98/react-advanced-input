@@ -14,7 +14,9 @@ const COMMON_PROPS = {
 
 const Template = createStorybookTemplate<InputProps>((props) => {
   return (
-    <Input {...props} />
+    <form onSubmit={(e) => e.preventDefault()}>
+      <Input {...props} />
+    </form>
   )
 })
 
@@ -33,6 +35,10 @@ export const Password = Template.createVariant({
 export const Email = Template.createVariant({
   ...COMMON_PROPS,
   type: 'email',
+});
+export const Url = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'url',
 });
 export const TextArea = Template.createVariant({
   ...COMMON_PROPS,

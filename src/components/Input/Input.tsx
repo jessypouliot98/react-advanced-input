@@ -16,8 +16,9 @@ export const Input: React.FC<InputProps> = (props) => {
   switch (props.type) {
     case "text":
     case "string":
-    case "email":
     case "password":
+    case "email":
+    case "url":
       return <InputString {...props} />;
     case "textarea":
       return <InputTextArea {...props} />;
