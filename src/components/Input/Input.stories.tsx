@@ -14,16 +14,14 @@ const COMMON_PROPS = {
 
 const Template = createStorybookTemplate<InputProps>((props) => {
   return (
-    <form onSubmit={(e) => {
-      e.preventDefault();
-      const formData = new FormData(e.target as any);
-      console.log(Object.fromEntries(Array.from(formData.entries())));
-    }}>
-      <Input {...props} />
-    </form>
+    <Input {...props} />
   )
 })
 
+export const Text = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'text',
+});
 export const String = Template.createVariant({
   ...COMMON_PROPS,
   type: 'string',
@@ -35,6 +33,10 @@ export const Password = Template.createVariant({
 export const Email = Template.createVariant({
   ...COMMON_PROPS,
   type: 'email',
+});
+export const TextArea = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'textarea',
 });
 export const Number = Template.createVariant({
   ...COMMON_PROPS,
@@ -51,4 +53,23 @@ export const Int = Template.createVariant({
 export const Uint = Template.createVariant({
   ...COMMON_PROPS,
   type: 'uint',
+});
+export const Select = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'select',
+  nullable: true,
+  options: [
+    { value: 'foo', label: 'Foo' },
+    { value: 'bar', label: 'Bar' },
+    { value: 'baz', label: 'Baz' },
+  ],
+});
+export const Checkbox = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'checkbox',
+  options: [
+    { value: 'foo', label: 'Foo' },
+    { value: 'bar', label: 'Bar' },
+    { value: 'baz', label: 'Baz' },
+  ],
 });

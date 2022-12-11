@@ -1,17 +1,16 @@
 import React, {forwardRef, useCallback} from "react";
-import {InputComponentProps} from "../types";
-import {getType} from "./utils";
+import {TextAreaComponentProps} from "../types";
 import {useInputValue} from "../../../hooks/input/useInputValue";
 
-export type StringType = 'text' | 'string' | 'password' | 'email';
-export type InputStringProps = InputComponentProps<StringType, string>;
+export type TextAreaType = 'textarea';
+export type InputTextAreaProps = TextAreaComponentProps<TextAreaType, string>;
 
-export const InputString = forwardRef<HTMLInputElement, InputStringProps>((props, ref) => {
+export const InputTextArea = forwardRef<HTMLTextAreaElement, InputTextAreaProps>((props, ref) => {
   const { type, onChange, onChangeValue, ...inputProps } = props;
 
   const { value, setValue } = useInputValue(props);
 
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
     const value = e.target.value;
     setValue(value)
     onChange?.(e);
@@ -19,10 +18,9 @@ export const InputString = forwardRef<HTMLInputElement, InputStringProps>((props
   }, [onChange, onChangeValue, setValue]);
 
   return (
-    <input
+    <textarea
       {...inputProps}
       ref={ref}
-      type={getType(type)}
       value={value ?? ''}
       onChange={handleChange}
     />

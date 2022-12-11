@@ -4,6 +4,7 @@ export const getType = (type: StringType) => {
   switch (type) {
     case "password": return "password";
     case "email": return "email";
+    case "text":
     case "string":
     default:
       return "text";
