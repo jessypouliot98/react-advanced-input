@@ -6,7 +6,8 @@
       "dom.iterable",
       "esnext"
     ],
-    "allowJs": true,
+    "declaration": true,
+    "allowJs": false,
     "skipLibCheck": true,
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
@@ -17,10 +18,16 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true,
-    "jsx": "react-jsx"
+    "noEmit": false,
+    "jsx": "react-jsx",
+    "rootDir": "src",
+    "outDir": "lib"
   },
   "include": [
-    "src"
+    "src",
+  ],
+  "exclude": [
+    "**/*.stories.tsx",
+    "src/utils/storybook.ts"
   ]
 }
