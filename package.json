@@ -1,6 +1,14 @@
 {
   "name": "react-advanced-inputs",
-  "version": "0.1.1",
+  "author": "jessyp98",
+  "version": "0.1.2",
+  "description": "react-advanced-input is an input library aiming improve on the base HTML input's by extending on them and bringing them together with extra features.",
+  "keywords": [
+    "react",
+    "form",
+    "input",
+    "HTML"
+  ],
   "private": false,
   "main": "lib",
   "types": "lib",
@@ -41,6 +49,12 @@
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
     "webpack": "^5.75.0"
+  },
+  "repository": {
+    "url": "https://github.com/jessypouliot98/react-advanced-inputs"
+  },
+  "bugs": {
+    "url": "https://github.com/jessypouliot98/react-advanced-inputs/issues"
   },
   "eslintConfig": {
     "extends": [
