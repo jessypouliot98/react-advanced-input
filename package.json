@@ -1,7 +1,7 @@
 {
   "name": "react-advanced-input",
   "author": "jessyp98",
-  "version": "0.1.1",
+  "version": "0.1.1a",
   "description": "react-advanced-input is an input library aiming improve on the base HTML input's by extending on them and bringing them together with extra features.",
   "keywords": [
     "react",
@@ -10,10 +10,14 @@
     "HTML"
   ],
   "private": false,
-  "main": "lib",
-  "types": "lib",
+  "main": "lib/cjs/index.js",
+  "jsnext:main": "dist/es/index.js",
+  "module": "lib/esm/index.js",
+  "types": "lib/esm/index.d.ts",
   "scripts": {
-    "build": "rm -rf ./lib && tsc",
+    "build:esm": "rm -rf ./lib/esm && tsc --outDir ./lib/esm --module ES6",
+    "build:cjs": "rm -rf ./lib/cjs && tsc --outDir ./lib/cjs --module CommonJS",
+    "build": "yarn build:esm && yarn build:cjs",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "storybook": "start-storybook -p 6006"
@@ -21,8 +25,8 @@
   "dependencies": {
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": "*",
+    "react-dom": "*"
   },
   "devDependencies": {
     "@storybook/addon-actions": "^6.5.14",
