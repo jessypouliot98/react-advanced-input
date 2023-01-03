@@ -1,17 +1,18 @@
 import React, {forwardRef, useCallback} from "react";
-import {useInputValue} from "../../../hooks/input/useInputValue";
 import {CustomInputComponentProps, PlaceholderInputPropKeys, StringInputPropKeys} from "../types";
+import {getType} from "./utils";
+import {useInputValue} from "../../../hooks/input/useInputValue";
 
-export type NumberType = 'number';
-type Value = string | number;
-export type InputNumberProps = CustomInputComponentProps<
-  NumberType,
+export type TextType = 'text' | 'password' | 'email' | 'url';
+type Value = string;
+export type InputStringProps = CustomInputComponentProps<
+  TextType,
   Value,
   PlaceholderInputPropKeys | StringInputPropKeys
 >;
 
-export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>((props, ref) => {
-  const { type, onChange, ...inputProps } = props;
+export const InputText = forwardRef<HTMLInputElement, InputStringProps>((props, ref) => {
+  const { type, onChange, onBlur, ...inputProps } = props;
   const { value, setValue } = useInputValue<Value>(props);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +24,7 @@ export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>((props
     <input
       {...inputProps}
       ref={ref}
-      type="number"
+      type={getType(type)}
       value={value ?? ''}
       defaultValue={undefined}
       onChange={handleChange}

@@ -1,43 +1,48 @@
-import React, {forwardRef, useCallback, useMemo} from "react";
-import {SelectComponentProps} from "../types";
+import React, {ForwardedRef, forwardRef, useCallback} from "react";
 import {useInputValue} from "../../../hooks/input/useInputValue";
+import {
+  CustomSelectComponentProps,
+  Option,
+} from "../types";
 
 const NULL_OPTION_VALUE = '';
 
 export type SelectType = 'select';
-export type InputSelectProps = SelectComponentProps<SelectType, string | null>;
+type Value = string;
+export type InputSelectProps<TOption extends Option = Option> = CustomSelectComponentProps<
+  SelectType,
+  Value
+> & {
+  nullable?: boolean;
+  options?: TOption[];
+};
 
-export const InputSelect = forwardRef<HTMLSelectElement, InputSelectProps>((props, ref) => {
-  const { type, onChange, onChangeValue, options, nullable, placeholder, ...selectProps } = props;
-
-  const { value, setValue } = useInputValue(props);
-  const inputValue = useMemo(() => {
-    if (!value) {
-      return nullable ? NULL_OPTION_VALUE : '';
-    }
-
-    return value;
-  }, [value, nullable]);
+export const InputSelect = forwardRef(<TOption extends Option = Option>(
+  props: InputSelectProps<TOption>,
+  ref: ForwardedRef<HTMLSelectElement>
+) => {
+  const { type, onChange, options, nullable, ...selectProps } = props;
+  const { value, setValue } = useInputValue<Value>(props);
 
   const handleChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value || null;
+    const value = e.target.value;
     setValue(value)
     onChange?.(e);
-    onChangeValue?.({ value });
-  }, [onChange, onChangeValue, setValue]);
+  }, [onChange, setValue]);
 
   return (
     <select
       {...selectProps}
-      value={inputValue}
+      ref={ref}
+      value={value ?? ''}
       defaultValue={undefined}
       onChange={handleChange}
     >
       {!!nullable && (
         <option value={NULL_OPTION_VALUE}>
-          {placeholder}
+          {selectProps.placeholder}
         </option>
-      )}
+        )}
       {(options || []).map((option) => (
         <option key={option.value} value={option.value}>
           {option.label ?? option.value}

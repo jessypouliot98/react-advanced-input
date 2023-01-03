@@ -1,12 +1,19 @@
 import React, {forwardRef, useCallback} from "react";
-import {TextAreaComponentProps} from "../types";
+import {CustomTextAreaComponentProps} from "../types";
 import {useInputValue} from "../../../hooks/input/useInputValue";
 
 export type TextAreaType = 'textarea';
-export type InputTextAreaProps = TextAreaComponentProps<TextAreaType, string>;
+type Value = string;
+export type InputTextAreaProps = CustomTextAreaComponentProps<
+  TextAreaType,
+  Value
+>;
 
-export const InputTextArea = forwardRef<HTMLTextAreaElement, InputTextAreaProps>((props, ref) => {
-  const { type, onChange, onChangeValue, ...inputProps } = props;
+export const InputTextArea = forwardRef<HTMLTextAreaElement, InputTextAreaProps>((
+  props,
+  ref
+) => {
+  const { type, onChange, ...inputProps } = props;
 
   const { value, setValue } = useInputValue(props);
 
@@ -14,8 +21,7 @@ export const InputTextArea = forwardRef<HTMLTextAreaElement, InputTextAreaProps>
     const value = e.target.value;
     setValue(value)
     onChange?.(e);
-    onChangeValue?.({ value });
-  }, [onChange, onChangeValue, setValue]);
+  }, [onChange, setValue]);
 
   return (
     <textarea

@@ -1,12 +1,11 @@
-import type {StringType} from "./InputString";
+import type {TextType} from "./InputText";
 
-export const getType = (type: StringType) => {
+export const getType = (type: TextType) => {
   switch (type) {
     case "password": return "password";
     case "email": return "email";
     case "url": return "url";
     case "text":
-    case "string":
     default:
       return "text";
   }

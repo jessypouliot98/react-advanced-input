@@ -1,6 +1,5 @@
 import {Input, InputProps} from "./Input";
 import {createStorybookTemplate} from "../../utils/storybook";
-import {InputString} from "./InputString/InputString";
 
 export default {
   title: 'Input',
@@ -31,10 +30,6 @@ export const Text = Template.createVariant({
   ...COMMON_PROPS,
   type: 'text',
 });
-export const String = Template.createVariant({
-  ...COMMON_PROPS,
-  type: 'string',
-});
 export const Password = Template.createVariant({
   ...COMMON_PROPS,
   type: 'password',
@@ -55,35 +50,14 @@ export const Number = Template.createVariant({
   ...COMMON_PROPS,
   type: 'number',
 });
-export const Float = Template.createVariant({
-  ...COMMON_PROPS,
-  type: 'float',
-});
-export const Int = Template.createVariant({
-  ...COMMON_PROPS,
-  type: 'int',
-});
-export const Uint = Template.createVariant({
-  ...COMMON_PROPS,
-  type: 'uint',
-});
 export const Select = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'select',
+  options: BASE_OPTIONS,
+});
+export const SelectNullable = Template.createVariant({
   ...COMMON_PROPS,
   type: 'select',
   nullable: true,
   options: BASE_OPTIONS,
-});
-export const Checkbox = Template.createVariant({
-  ...COMMON_PROPS,
-  type: 'checkbox',
-  options: BASE_OPTIONS,
-});
-export const Radio = Template.createVariant({
-  ...COMMON_PROPS,
-  type: 'radio',
-  options: BASE_OPTIONS,
-});
-export const Boolean = Template.createVariant({
-  ...COMMON_PROPS,
-  type: 'boolean',
 });
