@@ -1,7 +1,6 @@
-import React, {forwardRef, useCallback} from "react";
+import React, {forwardRef} from "react";
 import {CustomInputComponentProps, PlaceholderInputPropKeys, StringInputPropKeys} from "../types";
 import {getType} from "./utils";
-import {useInputValue} from "../../../hooks/input/useInputValue";
 import {getCommonInputProps} from "../../../utils/props";
 
 export type TextType = 'text' | 'password' | 'email' | 'url';
@@ -13,13 +12,7 @@ export type InputStringProps = CustomInputComponentProps<
 >;
 
 export const InputText = forwardRef<HTMLInputElement, InputStringProps>((props, ref) => {
-  const { type, onChange, onBlur, ...inputProps } = props;
-  const { value, setValue } = useInputValue<Value>(props);
-
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value)
-    onChange?.(e);
-  }, [onChange, setValue]);
+  const { type, ...inputProps } = props;
 
   return (
     <input
@@ -27,9 +20,6 @@ export const InputText = forwardRef<HTMLInputElement, InputStringProps>((props, 
       {...getCommonInputProps(props)}
       ref={ref}
       type={getType(type)}
-      value={value ?? ''}
-      defaultValue={undefined}
-      onChange={handleChange}
     />
   )
 });

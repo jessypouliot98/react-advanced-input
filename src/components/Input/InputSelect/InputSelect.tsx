@@ -1,5 +1,4 @@
-import React, {ForwardedRef, forwardRef, useCallback} from "react";
-import {useInputValue} from "../../../hooks/input/useInputValue";
+import React, {ForwardedRef, forwardRef} from "react";
 import {
   CustomSelectComponentProps,
   Option,
@@ -22,23 +21,13 @@ export const InputSelect = forwardRef(<TOption extends Option = Option>(
   props: InputSelectProps<TOption>,
   ref: ForwardedRef<HTMLSelectElement>
 ) => {
-  const { type, onChange, options, nullable, ...selectProps } = props;
-  const { value, setValue } = useInputValue<Value>(props);
-
-  const handleChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
-    const value = e.target.value;
-    setValue(value)
-    onChange?.(e);
-  }, [onChange, setValue]);
+  const { type, options, nullable, ...selectProps } = props;
 
   return (
     <select
       {...selectProps}
       {...getCommonInputProps(props)}
       ref={ref}
-      value={value ?? ''}
-      defaultValue={undefined}
-      onChange={handleChange}
     >
       {!!nullable && (
         <option value={NULL_OPTION_VALUE}>
