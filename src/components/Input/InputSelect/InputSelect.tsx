@@ -4,6 +4,7 @@ import {
   CustomSelectComponentProps,
   Option,
 } from "../types";
+import {getCommonInputProps} from "../../../utils/props";
 
 const NULL_OPTION_VALUE = '';
 
@@ -33,6 +34,7 @@ export const InputSelect = forwardRef(<TOption extends Option = Option>(
   return (
     <select
       {...selectProps}
+      {...getCommonInputProps(props)}
       ref={ref}
       value={value ?? ''}
       defaultValue={undefined}
@@ -51,3 +53,5 @@ export const InputSelect = forwardRef(<TOption extends Option = Option>(
     </select>
   )
 });
+
+InputSelect.displayName = 'InputSelect';

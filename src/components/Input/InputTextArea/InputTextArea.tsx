@@ -1,6 +1,7 @@
 import React, {forwardRef, useCallback} from "react";
 import {CustomTextAreaComponentProps} from "../types";
 import {useInputValue} from "../../../hooks/input/useInputValue";
+import {getCommonInputProps} from "../../../utils/props";
 
 export type TextAreaType = 'textarea';
 type Value = string;
@@ -26,6 +27,7 @@ export const InputTextArea = forwardRef<HTMLTextAreaElement, InputTextAreaProps>
   return (
     <textarea
       {...inputProps}
+      {...getCommonInputProps(props)}
       ref={ref}
       value={value ?? ''}
       defaultValue={undefined}
@@ -33,3 +35,5 @@ export const InputTextArea = forwardRef<HTMLTextAreaElement, InputTextAreaProps>
     />
   )
 });
+
+InputTextArea.displayName = 'InputTextArea';

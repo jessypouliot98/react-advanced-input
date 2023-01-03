@@ -32,4 +32,6 @@ export const Input = forwardRef(<TOption extends Option = Option>(
     default:
       return null;
   }
-})
+});
+
+Input.displayName = 'Input';
