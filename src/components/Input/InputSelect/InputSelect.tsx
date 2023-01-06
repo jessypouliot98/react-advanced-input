@@ -5,7 +5,7 @@ import {
 } from "../types";
 import {getCommonInputProps} from "../../../utils/props";
 
-const NULL_OPTION_VALUE = '';
+export const NULL_OPTION_VALUE = '';
 
 export type SelectType = 'select';
 type Value = string;
