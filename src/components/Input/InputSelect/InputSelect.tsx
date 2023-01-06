@@ -32,9 +32,11 @@ export const InputSelect = forwardRef(<TOption extends Option = Option>(
       ref={ref}
       defaultValue={defaultValue}
     >
-      <option value={NULL_OPTION_VALUE} disabled={!nullable} data-option-placeholder={true}>
-        {selectProps.placeholder}
-      </option>
+      {(!!selectProps.placeholder || typeof nullable !== 'undefined') && (
+        <option value={NULL_OPTION_VALUE} disabled={!nullable} data-option-placeholder={true}>
+          {selectProps.placeholder}
+        </option>
+      )}
       {(options || []).map((option) => (
         <option key={option.value} value={option.value}>
           {option.label ?? option.value}

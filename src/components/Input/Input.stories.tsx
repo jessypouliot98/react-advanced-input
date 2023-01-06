@@ -56,6 +56,12 @@ export const Range = Template.createVariant({
 });
 export const Select = Template.createVariant({
   ...COMMON_PROPS,
+  placeholder: undefined,
+  type: 'select',
+  options: BASE_OPTIONS,
+});
+export const SelectWithPlaceholder = Template.createVariant({
+  ...COMMON_PROPS,
   type: 'select',
   options: BASE_OPTIONS,
 });
