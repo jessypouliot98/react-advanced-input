@@ -64,4 +64,24 @@ export const SelectNullable = Template.createVariant({
 export const File = Template.createVariant({
   ...COMMON_PROPS,
   type: 'file',
-})
+});
+export const Date = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'date',
+});
+export const DateTimeLocal = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'datetime-local',
+});
+export const Month = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'month',
+});
+export const Week = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'week',
+});
+export const Time = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'time',
+});

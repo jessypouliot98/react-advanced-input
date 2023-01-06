@@ -3,6 +3,7 @@ import {InputText, InputStringProps} from "./InputText/InputText";
 import {InputNumber, InputNumberProps} from "./InputNumber/InputNumber";
 import {InputTextArea, InputTextAreaProps} from "./InputTextArea/InputTextArea";
 import {InputSelect, InputSelectProps} from "./InputSelect/InputSelect";
+import {InputDate, InputDateProps} from "./InputDate/InputDate";
 import {InputFile, InputFileProps} from "./InputFile/InputFile";
 import {Option} from "./types";
 
@@ -13,6 +14,7 @@ export type InputProps<
   | InputTextAreaProps
   | InputNumberProps
   | InputSelectProps<TOption>
+  | InputDateProps
   | InputFileProps;
 
 export const Input = forwardRef(<TOption extends Option = Option>(
@@ -24,6 +26,7 @@ export const Input = forwardRef(<TOption extends Option = Option>(
     case "password":
     case "email":
     case "url":
+    case "search":
       return <InputText ref={ref} {...props} />;
     case "textarea":
       return <InputTextArea ref={ref} {...props} />;
@@ -31,6 +34,12 @@ export const Input = forwardRef(<TOption extends Option = Option>(
       return <InputNumber ref={ref} {...props} />;
     case "select":
       return <InputSelect ref={ref} {...props} />;
+    case "date":
+    case "datetime-local":
+    case "month":
+    case "time":
+    case "week":
+      return <InputDate ref={ref} {...props} />;
     case "file":
       return <InputFile ref={ref} {...props} />;
     default:

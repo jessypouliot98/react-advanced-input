@@ -46,7 +46,7 @@ type NormalizedSelectComponentProps = Omit<
   SelectComponentProps,
   | OmittedInputPropKeys
   | ValuePropKeys
-  | CombinedInputPropKeys
+  | Exclude<CombinedInputPropKeys, PlaceholderInputPropKeys>
 >
 
 type ValueProps<TValue> =
