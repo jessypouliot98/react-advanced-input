@@ -61,3 +61,7 @@ export const SelectNullable = Template.createVariant({
   nullable: true,
   options: BASE_OPTIONS,
 });
+export const File = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'file',
+})

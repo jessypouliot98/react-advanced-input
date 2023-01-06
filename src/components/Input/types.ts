@@ -6,11 +6,12 @@ type SelectComponentProps = ComponentPropsWithoutRef<'select'>;
 
 type OmittedInputPropKeys =
   | 'type'
+  | 'multiple'
 export type ValuePropKeys =
   | 'value'
   | 'defaultValue'
 export type PlaceholderInputPropKeys = 'placeholder';
-export type StringInputPropKeys = 'maxLength';
+export type StringInputPropKeys = 'maxLength' | 'spellCheck';
 export type NumberInputPropKeys =
   | 'min'
   | 'aria-valuemin'
@@ -18,24 +19,34 @@ export type NumberInputPropKeys =
   | 'aria-valuemax';
 export type CheckboxInputPropKeys =
   | 'checked'
+  | 'defaultChecked'
   | 'aria-checked'
+export type FileInputPropKeys =
+  | 'accept'
+export type CombinedInputPropKeys =
+  | FileInputPropKeys
+  | StringInputPropKeys
+  | NumberInputPropKeys
+  | CheckboxInputPropKeys
+  | PlaceholderInputPropKeys
 
 type NormalizedInputComponentProps = Omit<
   InputComponentProps,
   | ValuePropKeys
   | OmittedInputPropKeys
-  | StringInputPropKeys
-  | NumberInputPropKeys
-  | CheckboxInputPropKeys
-  | PlaceholderInputPropKeys
+  | CombinedInputPropKeys
 >
 type NormalizedTextAreaComponentProps = Omit<
   TextAreaComponentProps,
-  ValuePropKeys
+  | OmittedInputPropKeys
+  | ValuePropKeys
+  | Exclude<CombinedInputPropKeys, StringInputPropKeys>
 >
 type NormalizedSelectComponentProps = Omit<
   SelectComponentProps,
-  ValuePropKeys
+  | OmittedInputPropKeys
+  | ValuePropKeys
+  | CombinedInputPropKeys
 >
 
 type ValueProps<TValue> =
@@ -46,7 +57,7 @@ export type Option = { value: string; label?: string };
 export type CustomInputComponentProps<
   TType extends string,
   TValue extends any,
-  TPicked extends StringInputPropKeys | NumberInputPropKeys | CheckboxInputPropKeys | PlaceholderInputPropKeys
+  TPicked extends CombinedInputPropKeys
 > =
   & { type: TType }
   & ValueProps<TValue>

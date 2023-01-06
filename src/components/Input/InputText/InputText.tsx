@@ -1,6 +1,5 @@
 import React, {forwardRef} from "react";
 import {CustomInputComponentProps, PlaceholderInputPropKeys, StringInputPropKeys} from "../types";
-import {getType} from "./utils";
 import {getCommonInputProps} from "../../../utils/props";
 
 export type TextType = 'text' | 'password' | 'email' | 'url';
@@ -12,14 +11,11 @@ export type InputStringProps = CustomInputComponentProps<
 >;
 
 export const InputText = forwardRef<HTMLInputElement, InputStringProps>((props, ref) => {
-  const { type, ...inputProps } = props;
-
   return (
     <input
-      {...inputProps}
+      {...props}
       {...getCommonInputProps(props)}
       ref={ref}
-      type={getType(type)}
     />
   )
 });

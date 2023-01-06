@@ -11,14 +11,12 @@ export type InputNumberProps = CustomInputComponentProps<
 >;
 
 export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>((props, ref) => {
-  const { type, ...inputProps } = props;
-
   return (
     <input
-      {...inputProps}
+      {...props}
       {...getCommonInputProps(props)}
-      ref={ref}
       type="number"
+      ref={ref}
     />
   )
 });

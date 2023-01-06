@@ -3,6 +3,7 @@ import {InputText, InputStringProps} from "./InputText/InputText";
 import {InputNumber, InputNumberProps} from "./InputNumber/InputNumber";
 import {InputTextArea, InputTextAreaProps} from "./InputTextArea/InputTextArea";
 import {InputSelect, InputSelectProps} from "./InputSelect/InputSelect";
+import {InputFile, InputFileProps} from "./InputFile/InputFile";
 import {Option} from "./types";
 
 export type InputProps<
@@ -11,7 +12,8 @@ export type InputProps<
   | InputStringProps
   | InputTextAreaProps
   | InputNumberProps
-  | InputSelectProps<TOption>;
+  | InputSelectProps<TOption>
+  | InputFileProps;
 
 export const Input = forwardRef(<TOption extends Option = Option>(
   props: InputProps<TOption>,
@@ -29,6 +31,8 @@ export const Input = forwardRef(<TOption extends Option = Option>(
       return <InputNumber ref={ref} {...props} />;
     case "select":
       return <InputSelect ref={ref} {...props} />;
+    case "file":
+      return <InputFile ref={ref} {...props} />;
     default:
       return null;
   }
