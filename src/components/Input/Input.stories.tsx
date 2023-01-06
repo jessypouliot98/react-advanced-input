@@ -50,6 +50,10 @@ export const Number = Template.createVariant({
   ...COMMON_PROPS,
   type: 'number',
 });
+export const Range = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'range',
+});
 export const Select = Template.createVariant({
   ...COMMON_PROPS,
   type: 'select',
@@ -65,7 +69,7 @@ export const File = Template.createVariant({
   ...COMMON_PROPS,
   type: 'file',
 });
-export const Date = Template.createVariant({
+export const Date_ = Template.createVariant({
   ...COMMON_PROPS,
   type: 'date',
 });

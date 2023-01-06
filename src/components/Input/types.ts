@@ -24,11 +24,11 @@ export type CheckboxInputPropKeys =
 export type FileInputPropKeys =
   | 'accept'
 export type CombinedInputPropKeys =
-  | FileInputPropKeys
+  | PlaceholderInputPropKeys
   | StringInputPropKeys
   | NumberInputPropKeys
   | CheckboxInputPropKeys
-  | PlaceholderInputPropKeys
+  | FileInputPropKeys
 
 type NormalizedInputComponentProps = Omit<
   InputComponentProps,

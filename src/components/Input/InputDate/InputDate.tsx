@@ -1,10 +1,9 @@
 import React, {forwardRef, useMemo} from "react";
 import {CustomInputComponentProps, PlaceholderInputPropKeys, StringInputPropKeys} from "../types";
 import {getCommonInputProps} from "../../../utils/props";
-import {getDateValue} from "./utils";
 
 export type DateType = 'date' | 'datetime-local' | 'month' | 'time' | 'week';
-type Value = string | number | Date;
+type Value = string;
 export type InputDateProps = CustomInputComponentProps<
   DateType,
   Value,
@@ -15,10 +14,10 @@ export const InputDate = forwardRef<HTMLInputElement, InputDateProps>((props, re
   const { value, defaultValue, ...inputProps } = props;
   const valueProps = useMemo(() => {
     if (value !== undefined) {
-      return { value: getDateValue(value) };
+      return { value };
     }
 
-    return { defaultValue: getDateValue(defaultValue) }
+    return { defaultValue: defaultValue ?? '' }
   }, [value, defaultValue]);
 
   return (
