@@ -1,4 +1,4 @@
-import React, {forwardRef} from "react";
+import React, {forwardRef, useCallback} from "react";
 import {CustomTextAreaComponentProps} from "../types";
 import {getCommonInputProps} from "../../../utils/props";
 
@@ -13,13 +13,19 @@ export const InputTextArea = forwardRef<HTMLTextAreaElement, InputTextAreaProps>
   props,
   ref
 ) => {
-  const { type, ...inputProps } = props;
+  const { onChangeValue, onChange, ...inputProps } = props;
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLTextAreaElement>) => {
+    onChange?.(e);
+    onChangeValue?.(e.target.value);
+  }, [onChange, onChangeValue]);
 
   return (
     <textarea
       {...inputProps}
       {...getCommonInputProps(props)}
       ref={ref}
+      onChange={handleChange}
     />
   )
 });

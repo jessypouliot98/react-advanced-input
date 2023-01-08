@@ -1,4 +1,4 @@
-import React, {forwardRef, useMemo} from "react";
+import React, {forwardRef, useCallback} from "react";
 import {CustomInputComponentProps, PlaceholderInputPropKeys, StringInputPropKeys} from "../types";
 import {getCommonInputProps} from "../../../utils/props";
 
@@ -11,21 +11,19 @@ export type InputDateProps = CustomInputComponentProps<
 >;
 
 export const InputDate = forwardRef<HTMLInputElement, InputDateProps>((props, ref) => {
-  const { value, defaultValue, ...inputProps } = props;
-  const valueProps = useMemo(() => {
-    if (value !== undefined) {
-      return { value };
-    }
+  const { onChangeValue, onChange, ...inputProps } = props;
 
-    return { defaultValue: defaultValue ?? '' }
-  }, [value, defaultValue]);
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e);
+    onChangeValue?.(e.target.value);
+  }, [onChange, onChangeValue]);
 
   return (
     <input
       {...inputProps}
       {...getCommonInputProps(props)}
-      {...valueProps}
       ref={ref}
+      onChange={handleChange}
     />
   )
 });

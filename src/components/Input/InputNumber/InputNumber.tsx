@@ -1,4 +1,4 @@
-import React, {forwardRef} from "react";
+import React, {forwardRef, useCallback} from "react";
 import {CustomInputComponentProps, NumberInputPropKeys, PlaceholderInputPropKeys} from "../types";
 import {getCommonInputProps} from "../../../utils/props";
 
@@ -11,12 +11,20 @@ export type InputNumberProps = CustomInputComponentProps<
 >;
 
 export const InputNumber = forwardRef<HTMLInputElement, InputNumberProps>((props, ref) => {
+  const { onChangeValue, onChange, ...inputProps } = props;
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e);
+    onChangeValue?.(e.target.value);
+  }, [onChange, onChangeValue]);
+
   return (
     <input
-      {...props}
-      {...getCommonInputProps(props)}
-      type="number"
+      {...inputProps}
+      {...getCommonInputProps(inputProps)}
       ref={ref}
+      type="number"
+      onChange={handleChange}
     />
   )
 });

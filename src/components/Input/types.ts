@@ -1,8 +1,8 @@
 import {ComponentPropsWithoutRef} from "react";
 
-type InputComponentProps = ComponentPropsWithoutRef<'input'>;
-type TextAreaComponentProps = ComponentPropsWithoutRef<'textarea'>;
-type SelectComponentProps = ComponentPropsWithoutRef<'select'>;
+export type InputComponentProps = ComponentPropsWithoutRef<'input'>;
+export type TextAreaComponentProps = ComponentPropsWithoutRef<'textarea'>;
+export type SelectComponentProps = ComponentPropsWithoutRef<'select'>;
 
 type OmittedInputPropKeys =
   | 'type'
@@ -30,24 +30,27 @@ export type CombinedInputPropKeys =
   | CheckboxInputPropKeys
   | FileInputPropKeys
 
-type NormalizedInputComponentProps = Omit<
+export type NormalizedInputComponentProps = Omit<
   InputComponentProps,
   | ValuePropKeys
   | OmittedInputPropKeys
   | CombinedInputPropKeys
 >
-type NormalizedTextAreaComponentProps = Omit<
+export type NormalizedTextAreaComponentProps = Omit<
   TextAreaComponentProps,
   | OmittedInputPropKeys
   | ValuePropKeys
   | Exclude<CombinedInputPropKeys, StringInputPropKeys>
 >
-type NormalizedSelectComponentProps = Omit<
+export type NormalizedSelectComponentProps = Omit<
   SelectComponentProps,
   | OmittedInputPropKeys
   | ValuePropKeys
   | Exclude<CombinedInputPropKeys, PlaceholderInputPropKeys>
 >
+export type CustomInputEventProps<TValue> = {
+  onChangeValue?: (value: TValue) => void;
+}
 
 type ValueProps<TValue> =
   | { value?: TValue; defaultValue?: undefined; }
@@ -62,7 +65,8 @@ export type CustomInputComponentProps<
   & { type: TType }
   & ValueProps<TValue>
   & NormalizedInputComponentProps
-  & Pick<InputComponentProps, TPicked>;
+  & Pick<InputComponentProps, TPicked>
+  & CustomInputEventProps<TValue>;
 
 export type CustomTextAreaComponentProps<
   TType extends string,
@@ -70,7 +74,8 @@ export type CustomTextAreaComponentProps<
 > =
   & { type: TType }
   & ValueProps<TValue>
-  & NormalizedTextAreaComponentProps;
+  & NormalizedTextAreaComponentProps
+  & CustomInputEventProps<TValue>;
 
 export type CustomSelectComponentProps<
   TType extends string,
@@ -78,5 +83,6 @@ export type CustomSelectComponentProps<
 > =
   & { type: TType }
   & ValueProps<TValue>
-  & NormalizedSelectComponentProps;
+  & NormalizedSelectComponentProps
+  & CustomInputEventProps<TValue>;
 

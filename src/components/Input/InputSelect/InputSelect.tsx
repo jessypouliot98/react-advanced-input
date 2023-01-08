@@ -1,4 +1,4 @@
-import React, {ForwardedRef, forwardRef} from "react";
+import React, {ForwardedRef, forwardRef, useCallback} from "react";
 import {
   CustomSelectComponentProps,
   Option,
@@ -21,9 +21,14 @@ export const InputSelect = forwardRef(<TOption extends Option = Option>(
   props: InputSelectProps<TOption>,
   ref: ForwardedRef<HTMLSelectElement>
 ) => {
-  const { type, options, nullable, ...selectProps } = props;
+  const { onChangeValue, onChange, type, options, nullable, ...selectProps } = props;
   const hasUserSetValue = selectProps.value !== undefined || selectProps.defaultValue !== undefined;
   const defaultValue = !hasUserSetValue ? NULL_OPTION_VALUE : selectProps.defaultValue; // This allows us to default to placeholder option
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLSelectElement>) => {
+    onChange?.(e);
+    onChangeValue?.(e.target.value);
+  }, [onChange, onChangeValue]);
 
   return (
     <select
@@ -31,6 +36,7 @@ export const InputSelect = forwardRef(<TOption extends Option = Option>(
       {...getCommonInputProps(props)}
       ref={ref}
       defaultValue={defaultValue}
+      onChange={handleChange}
     >
       {(!!selectProps.placeholder || typeof nullable !== 'undefined') && (
         <option value={NULL_OPTION_VALUE} disabled={!nullable} data-option-placeholder={true}>

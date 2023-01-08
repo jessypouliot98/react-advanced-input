@@ -1,4 +1,4 @@
-import React, {forwardRef} from "react";
+import React, {forwardRef, useCallback} from "react";
 import {CustomInputComponentProps, PlaceholderInputPropKeys, StringInputPropKeys} from "../types";
 import {getCommonInputProps} from "../../../utils/props";
 
@@ -11,11 +11,19 @@ export type InputStringProps = CustomInputComponentProps<
 >;
 
 export const InputText = forwardRef<HTMLInputElement, InputStringProps>((props, ref) => {
+  const { onChangeValue, onChange, ...inputProps } = props;
+
+  const handleChange = useCallback((e: React.ChangeEvent<HTMLInputElement>) => {
+    onChange?.(e);
+    onChangeValue?.(e.target.value);
+  }, [onChange, onChangeValue]);
+
   return (
     <input
-      {...props}
-      {...getCommonInputProps(props)}
+      {...inputProps}
+      {...getCommonInputProps(inputProps)}
       ref={ref}
+      onChange={handleChange}
     />
   )
 });

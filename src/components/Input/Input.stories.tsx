@@ -10,6 +10,7 @@ const COMMON_PROPS = {
   id: 'example',
   name: 'example',
   placeholder: 'Placeholder..',
+  onChangeValue: console.log
 }
 
 const BASE_OPTIONS = [
