@@ -2,7 +2,7 @@ import {Input, InputProps} from "./Input";
 import {createStorybookTemplate} from "../../utils/storybook";
 
 export default {
-  title: 'Input',
+  title: 'components/Input',
   component: Input,
 }
 
