@@ -10,8 +10,8 @@ export const Test: React.FC = () => {
 
   const slugUncontrolledRef = useRef<HTMLInputElement | null>(null);
   const {
-    handlePrimaryInputChange: onChangeUncontrolledPrimary,
-    handleSecondaryInputChange: onChangeUncontrolledSecondary
+    onPrimaryInputChange: onChangeUncontrolledPrimary,
+    onSecondaryInputChange: onChangeUncontrolledSecondary
   } = useSyncedInput({
     defaultValues,
     transform: slugify,
@@ -23,8 +23,8 @@ export const Test: React.FC = () => {
   });
 
   const {
-    handlePrimaryInputChange: onChangeControlledPrimary,
-    handleSecondaryInputChange: onChangeControlledSecondary
+    onPrimaryInputChange: onChangeControlledPrimary,
+    onSecondaryInputChange: onChangeControlledSecondary
   } = useSyncedInput({
     defaultValues,
     transform: slugify,
