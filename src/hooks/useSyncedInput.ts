@@ -4,21 +4,26 @@ type CustomChangeEvent = React.ChangeEvent<HTMLInputElement | HTMLTextAreaElemen
 
 export type UseSyncedInputParams = {
   defaultValues?: { primary?: string, secondary?: string };
-  transform?: (v: string) => string;
-  setSecondaryValue: (v: string) => void;
+  transform?: (value: string) => string;
+  setSecondaryValue: (value: string) => void;
 }
 export const useSyncedInput = ({ defaultValues, transform, setSecondaryValue }: UseSyncedInputParams) => {
-  const valueRef = useRef(defaultValues ?? { primary: undefined, secondary: undefined });
-  const primaryTransformedValueRef = useRef(defaultValues?.primary ? transform?.(defaultValues?.primary) : defaultValues?.primary)
+  const valueRef = useRef({
+    primary: defaultValues?.primary,
+    secondary: defaultValues?.secondary,
+  });
+  const primaryTransformedValueRef = useRef(
+    defaultValues?.primary && transform
+      ? transform(defaultValues.primary)
+      : defaultValues?.primary
+  );
 
-  const getIsSynced = useCallback(() => {
-    return !valueRef.current.secondary || valueRef.current.secondary === primaryTransformedValueRef.current;
-  }, []);
+  const getIsSynced = useCallback(() => !valueRef.current.secondary || valueRef.current.secondary === primaryTransformedValueRef.current, []);
 
-  const handlePrimaryInputChange = useCallback((e: CustomChangeEvent) => {
+  const handleSetPrimaryValue = useCallback((value: string) => {
     const isSynced = getIsSynced();
-    const transformedValue = transform?.(e.target.value) ?? e.target.value;
-    valueRef.current.primary = e.target.value;
+    const transformedValue = transform?.(value) ?? value;
+    valueRef.current.primary = value;
     primaryTransformedValueRef.current = transformedValue;
 
     if (isSynced) {
@@ -27,12 +32,17 @@ export const useSyncedInput = ({ defaultValues, transform, setSecondaryValue }: 
     }
   }, [getIsSynced, setSecondaryValue, transform]);
 
-  const handleSecondaryInputChange = useCallback((e: CustomChangeEvent) => {
-    valueRef.current.secondary = e.target.value;
+  const handleSetSecondaryValue = useCallback((value: string) => {
+    valueRef.current.secondary = value;
   }, []);
 
+  const handlePrimaryInputChange = useCallback(({ target }: CustomChangeEvent) => handleSetPrimaryValue(target.value), [handleSetPrimaryValue]);
+  const handleSecondaryInputChange = useCallback(({ target }: CustomChangeEvent) => handleSetSecondaryValue(target.value), [handleSetSecondaryValue]);
+
   return {
-    handlePrimaryInputChange,
-    handleSecondaryInputChange
+    handleSetPrimaryValue,
+    handleSetSecondaryValue,
+    onPrimaryInputChange: handlePrimaryInputChange,
+    onSecondaryInputChange: handleSecondaryInputChange,
   }
 }
