@@ -1,7 +1,7 @@
 {
   "name": "react-advanced-input",
   "author": "jessyp98",
-  "version": "0.1.5",
+  "version": "0.1.7",
   "description": "react-advanced-input is an input library aiming improve on the base HTML input's by extending on them and bringing them together with extra features.",
   "keywords": [
     "react",
