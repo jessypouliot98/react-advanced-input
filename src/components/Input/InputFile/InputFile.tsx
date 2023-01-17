@@ -1,5 +1,5 @@
 import React, {forwardRef, useCallback} from "react";
-import {
+import type {
   CustomInputEventProps,
   FileInputPropKeys, InputComponentProps,
   NormalizedInputComponentProps

@@ -1,7 +1,7 @@
 import {queryHelpers, render} from "@testing-library/react";
 import {InputSelect, NULL_OPTION_VALUE} from "./InputSelect";
 import React from "react";
-import {Option} from "../types";
+import type {Option} from "../types";
 
 describe('<InputSelect>', () => {
   const optionA = { value: 'a' } satisfies Option;

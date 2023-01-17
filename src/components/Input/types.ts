@@ -1,4 +1,5 @@
-import {ComponentPropsWithoutRef} from "react";
+import type {ComponentPropsWithoutRef} from "react";
+import type {Transformer} from "../../utils/transformChangeEvent";
 
 export type InputComponentProps = ComponentPropsWithoutRef<'input'>;
 export type TextAreaComponentProps = ComponentPropsWithoutRef<'textarea'>;
@@ -86,3 +87,6 @@ export type CustomSelectComponentProps<
   & NormalizedSelectComponentProps
   & CustomInputEventProps<TValue>;
 
+export type TransformInputProps = {
+  transform?: Transformer;
+}

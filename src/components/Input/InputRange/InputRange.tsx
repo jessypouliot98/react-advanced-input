@@ -1,5 +1,5 @@
 import React, {forwardRef, useCallback} from "react";
-import {CustomInputComponentProps, NumberInputPropKeys} from "../types";
+import type {CustomInputComponentProps, NumberInputPropKeys} from "../types";
 import {getCommonInputProps} from "../../../utils/props";
 
 export type RangeType = 'range';

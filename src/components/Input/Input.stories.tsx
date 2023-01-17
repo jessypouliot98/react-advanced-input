@@ -31,6 +31,11 @@ export const Text = Template.createVariant({
   ...COMMON_PROPS,
   type: 'text',
 });
+export const TextWithTransform = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'text',
+  transform: (v) => v.toUpperCase().replace(/(\W)/g, '_'),
+});
 export const Password = Template.createVariant({
   ...COMMON_PROPS,
   type: 'password',
@@ -46,6 +51,13 @@ export const Url = Template.createVariant({
 export const TextArea = Template.createVariant({
   ...COMMON_PROPS,
   type: 'textarea',
+});
+export const TextAreaWithTransform = Template.createVariant({
+  ...COMMON_PROPS,
+  type: 'textarea',
+  transform: (v) => v
+    .replace(/(\.*)?\s{2,}/g, '. ')
+    .replace(/(^\w|\.(\s)?\w)/g, (letter) => letter.toUpperCase()),
 });
 export const Number = Template.createVariant({
   ...COMMON_PROPS,

@@ -1,5 +1,5 @@
 import React, {ForwardedRef, forwardRef, useCallback} from "react";
-import {
+import type {
   CustomSelectComponentProps,
   Option,
 } from "../types";

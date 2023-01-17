@@ -6,7 +6,7 @@ import {InputTextArea, InputTextAreaProps} from "./InputTextArea/InputTextArea";
 import {InputSelect, InputSelectProps} from "./InputSelect/InputSelect";
 import {InputDate, InputDateProps} from "./InputDate/InputDate";
 import {InputFile, InputFileProps} from "./InputFile/InputFile";
-import {Option} from "./types";
+import type {Option} from "./types";
 
 export type InputProps<
   TOption extends Option = Option,

@@ -1,5 +1,5 @@
 import React, {forwardRef, useCallback} from "react";
-import {CustomInputComponentProps, PlaceholderInputPropKeys, StringInputPropKeys} from "../types";
+import type {CustomInputComponentProps, PlaceholderInputPropKeys, StringInputPropKeys} from "../types";
 import {getCommonInputProps} from "../../../utils/props";
 
 export type DateType = 'date' | 'datetime-local' | 'month' | 'time' | 'week';
